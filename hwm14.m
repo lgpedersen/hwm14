@@ -1,5 +1,5 @@
-function hwm93()
-%% HWM93 model from Matlab.
+function hwm14()
+%% HWM14 model from Matlab.
 % https://www.scivision.dev/matlab-python-user-module-import/
 assert(~verLessThan('matlab', '9.5'), 'Matlab >= R2018b required')
 
@@ -13,7 +13,7 @@ f107a = 100;
 ap = 4;
 
 
-winds = py.hwm93.run(t, alt_km, glat, glon, f107a, f107, ap);
+winds = py.hwm14.run(t, alt_km, glat, glon, f107a, f107, ap);
 
 merid = xarray2mat(winds{'meridional'});
 zonal = xarray2mat(winds{'zonal'});

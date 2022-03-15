@@ -1,21 +1,24 @@
 #!/usr/bin/env python
 """
-Michael Hirsch
+Layne Pedersen
+
+Forked from: Michael Hirsch
+from https://github.com/space-physics/hwm93
 
 Original fortran code by A. E. Hedin
-from ftp://hanna.ccmc.gsfc.nasa.gov/pub/modelweb/atmospheric/hwm93/
+from ftp://hanna.ccmc.gsfc.nasa.gov/pub/modelweb/atmospheric/hwm14/
 """
 from pathlib import Path
 from numpy import arange
 from dateutil.parser import parse
 from argparse import ArgumentParser
-import hwm93
+import hwm14
 from matplotlib.pyplot import show
-from hwm93.plots import plothwm
+from hwm14.plots import plothwm
 
 
 def main():
-    p = ArgumentParser(description="calls HWM93 from Python, a basic demo")
+    p = ArgumentParser(description="calls HWM14 from Python, a basic demo")
     p.add_argument("simtime", help="yyyy-mm-ddTHH:MM:SS time of sim", nargs="?", default="2016-01-01T12")
     p.add_argument("-a", "--altkm", help="altitude (km) (start,stop,step)", type=float, nargs="+", default=(60, 1000, 5))
     p.add_argument("-c", "--latlon", help="geodetic latitude (deg)", type=float, default=(65, -148))
@@ -31,7 +34,7 @@ def main():
 
     T = parse(p.simtime)
 
-    winds = hwm93.run(T, altkm, glat, glon, p.f107a, p.f107, p.ap)
+    winds = hwm14.run(T, altkm, glat, glon, p.f107a, p.f107, p.ap)
 
     if p.outfn:
         outfn = Path(p.outfn).expanduser()

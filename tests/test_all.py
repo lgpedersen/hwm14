@@ -2,7 +2,7 @@
 from pytest import approx
 import pytest
 from datetime import datetime
-import hwm93
+import hwm14
 
 
 def test_hwm():
@@ -14,10 +14,10 @@ def test_hwm():
     f107 = 100
     ap = 4
 
-    wind = hwm93.run(t, altkm, glat, glon, f107a, f107, ap)
+    wind = hwm14.run(t, altkm, glat, glon, f107a, f107, ap)
 
-    assert wind["meridional"] == approx(-110.16133881, rel=1e-4)  # gfortran 4.6 vs 5.2
-    assert wind["zonal"] == approx(-12.40071201, rel=1e-4)  # gfortran 4.6 vs 5.2
+    assert wind["meridional"] == approx(-20.73515701, rel=1e-4)
+    assert wind["zonal"] == approx(35.82102585, rel=1e-4)
 
 
 if __name__ == "__main__":

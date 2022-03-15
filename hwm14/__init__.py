@@ -1,9 +1,12 @@
 import numpy as np
-import hwm93fort
+import hwm14fort
 from datetime import datetime
 from sciencedates import datetime2gtd
 from dateutil.parser import parse
 import xarray
+import os
+
+os.environ['HWMPATH'] = __path__[0] + '/data'
 
 
 def run(time: datetime, altkm: np.ndarray, glat: float, glon: float, f107a: float, f107: float, ap: int) -> xarray.Dataset:
@@ -18,7 +21,7 @@ def run(time: datetime, altkm: np.ndarray, glat: float, glon: float, f107a: floa
     zonal = np.empty(altkm.size, dtype=float)
 
     for i, a in enumerate(altkm):
-        w = hwm93fort.gws5(iyd, utsec, a, glat, glon, stl, f107a, f107, (ap, ap))
+        w = hwm14fort.hwm14(iyd, utsec, a, glat, glon, stl, f107a, f107, (ap, ap))
         merid[i] = w[0]
         zonal[i] = w[1]
 

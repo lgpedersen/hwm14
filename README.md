@@ -1,13 +1,6 @@
+# HWM14 in Python
 
-[![Actions Status](https://github.com/space-physics/hwm93/workflows/ci_python/badge.svg)](https://github.com/space-physics/hwm93/actions)
-
-[![PyPi version](https://img.shields.io/pypi/pyversions/hwm93.svg)](https://pypi.python.org/pypi/hwm93)
-[![PyPi Download stats](http://pepy.tech/badge/hwm93)](http://pepy.tech/project/hwm93)
-
-
-# HWM93 in Python
-
-NASA Horizontal Wind Model HWM93 in Python &ge; 3.6
+NASA Horizontal Wind Model HWM14 in Python &ge; 3.6
 
 
 ![image](tests/example.png)
@@ -28,16 +21,20 @@ If you don't have a Fortran compiler, here is how to install Gfortran:
 
 * Linux: `apt install gfortran`
 * Mac: `brew install gcc`
-* [Windows](https://www.scivision.dev/windows-gcc-gfortran-cmake-make-install/)
+* Windows
+  * Install [MSYS2](https://www.msys2.org/)
+  * pacman -S gfortran
 
-    pip install -e .
+Install HWM14 as an editable project:
+
+`pip install -e .`
 
 test by
 
     pytest -sv
 
 ### Windows
-If you get ImportError on Windows for the Fortran module, try from the `hwm93` directory:
+If you get ImportError on Windows for the Fortran module, try from the `hwm14` directory:
 ```posh
 del *.pyd
 python setup.py build_ext --inplace --compiler=mingw32
@@ -45,22 +42,22 @@ python setup.py build_ext --inplace --compiler=mingw32
 
 ## Usage
 
-HWM93 can be used from the command line or as an imported Python module in other programs.
-Matlab also can use HWM93.
+HWM14 can be used from the command line or as an imported Python module in other programs.
+Matlab also can use HWM14.
 
 ### Command line
 
-    python RunHWM93.py -h
+    python RunHWM14.py -h
 
 Write data to NetCDF (HDF5) with `-o` option.
 
 ### import module
 
 ```python
-import hwm93
+import hwm14
 from datetime import datetime
 
-winds = hwm93.run(t=datetime(2017,11,12,8), altkm=150.,
+winds = hwm14.run(t=datetime(2017,11,12,8), altkm=150.,
                     glat=65., glon=-148., f107a=150, f107=150, ap=4)
 ```
 
@@ -87,7 +84,7 @@ print(winds.zonal.values)
 
 ### Matlab
 
-You can import this Python module from Matlab as in `hwm93.m`.
+You can import this Python module from Matlab as in `hwm14.m`.
 
 ## Notes
 
@@ -103,7 +100,7 @@ meson test -C build
 or
 
 ```sh
-f2py -c src/hwm93_sub.f  -m hwm93 only: gws5 :
+f2py -c src/hwm14.f90  -m hwm14 only: gws5 :
 ```
 
 

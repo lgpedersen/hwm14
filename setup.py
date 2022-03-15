@@ -2,6 +2,6 @@
 import setuptools  # noqa: F401
 from numpy.distutils.core import setup, Extension
 
-ext = Extension(name="hwm93fort", sources=["src/hwm93_sub.f"], f2py_options=["only:", "gws5", ":", "--quiet"])
+ext = Extension(name="hwm14fort", sources=["src/hwm14.f90"], f2py_options=["only:", "hwm14", ":", "--quiet"])
 
-setup(ext_modules=[ext])
+setup(ext_modules=[ext], data_files=[('hwm14/data', ['hwm14/data'])])
